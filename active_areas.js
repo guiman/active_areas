@@ -34,7 +34,7 @@ var activeArea = function(){
   function initialize(areas, conditions, callbacks)
   {
     _areas = areas;
-    _conditions = conditions;
+    _conditions = conditions; // To be used in the near future
     _callbacks = callbacks; 
   }
 
@@ -69,7 +69,7 @@ var activeArea = function(){
     
       if (in_area)
       {
-        active_areas.push(i);
+        active_areas.push(areas[i]);
         _callbacks[i]();
       }
     }
