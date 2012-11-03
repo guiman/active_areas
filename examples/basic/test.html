@@ -8,7 +8,7 @@
     window.onload = init;
     
     function init() {
-      activeArea.initialize([[1024,50,[0,0]], [50,1024,[0,0]]], [], [function(){alert("area 1 yay!");},function(){alert("area 2 yay!");}]);
+      activeArea.initialize([[1024,100,[0,0]], [100,1024,[0,0]]], [], [function(){alert("Blue area yay!");},function(){alert("Red area yay!");}]);
       
     	if (window.Event) {
     	document.captureEvents(Event.MOUSEMOVE);
@@ -20,16 +20,14 @@
     {
       x = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
     	y = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
-      
-      console.log([x,y,1]);
-      
-      activeArea.run([x,y,1]);
+
+      activeArea.run([[x,y,1]]);
     }
     </script>
     
-    <div id="area1" style="position: fixed; top: 0; left: 0px;width: 1024px;height: 50px;background-color: blue;">Click on me!</div>
-    <div id="area2" style="position: fixed;top: 0px;left: 0px;width: 50px;height: 1024px;
-background-color: red;">Blue just sucks, click on me! I'm way more fun!</div>
+    <div id="area1" style="position: fixed; top: 0; left: 0px;width: 1024px;height: 100px;background-color: blue;"><span style="margin-left: 120px; color: white">Move the mouse over!</span></div>
+    <div id="area2" style="position: fixed;top: 0px;left: 0px;width: 100px;height: 1024px;
+background-color: red; color: white">Blue just sucks, move the mouse over me! I'm way more fun!</div>
     <div id="area3"></div>
   </body>
 </html>

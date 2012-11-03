@@ -53,24 +53,27 @@ var activeArea = function(){
   function activate_areas(stream_data, areas)
   {
     active_areas = new Array();
-
+    
     for (i = 0; i < areas.length ; i++)
     { 
-      x = stream_data[0];
-      y = stream_data[1];
-      
-      x_1 = areas[i][2][0];
-      x_2 = x_1 + areas[i][0];
-      
-      y_1 = areas[i][2][1];
-      y_2 = y_1 + areas[i][1];
-    
-      in_area = (y >= y_1) && (y <= y_2) && (x >= x_1) && (x <= x_2)
-    
-      if (in_area)
+      for (j = 0; j < stream_data.length; j++)
       {
-        active_areas.push(areas[i]);
-        _callbacks[i]();
+        x = stream_data[j][0];
+        y = stream_data[j][1];
+      
+        x_1 = areas[i][2][0];
+        x_2 = x_1 + areas[i][0];
+      
+        y_1 = areas[i][2][1];
+        y_2 = y_1 + areas[i][1];
+    
+        in_area = (y >= y_1) && (y <= y_2) && (x >= x_1) && (x <= x_2)
+    
+        if (in_area)
+        {
+          active_areas.push(areas[i]);
+          _callbacks[i]();
+        }
       }
     }
   
