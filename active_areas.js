@@ -31,16 +31,24 @@ var activeArea = function(){
   var _conditions = new Array();
   var _callbacks = new Array();
 
-  function initialize(areas, conditions, callbacks)
+  function initialize(areas, conditions, callbacks, not_in_any_area)
   {
     _areas = areas;
     _conditions = conditions; // To be used in the near future
-    _callbacks = callbacks; 
+    _callbacks = callbacks;
+    _not_in_any_area_callback = (not_in_any_area == undefined)? function(){} : not_in_any_area;
   }
 
   function run(stream_data)
   {
-    return activate_areas(stream_data, _areas);
+    ret = activate_areas(stream_data, _areas);
+    
+    if (ret.length == 0)
+    {
+      _not_in_any_area_callback();
+    }
+    
+    return ret;
   }
 
   function destroy()
@@ -72,7 +80,11 @@ var activeArea = function(){
         if (in_area)
         {
           active_areas.push(areas[i]);
-          _callbacks[i]();
+          
+          if ((conditions[i] != undefined) && (conditions[i](areas[i][3]) == true))
+          {
+            _callbacks[i](areas[i][3]);
+          }
         }
       }
     }
