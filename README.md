@@ -15,12 +15,12 @@ activeArea has a simple api consisting of three methods: initialize, run and des
 
 == First: initialize
 
-Initialize set's everything you need to start capturing position. It takes 4 argumens: areas, conditions, callbacks and not_in_any_area_callback.
+Initialize set's everything you need to start capturing position. It takes 4 arguments: areas, conditions, callbacks and not_in_any_area_callback.
 
-* Areas: represent the zones in the viewport that you want to respond to movement. It uses [x,y] as the upper left point and build a rectagle using the height and with.
+* Areas: represents the zones in the viewport that you want to respond to movement. It uses [x,y] as the upper left point and build a rectagle using the height and with.
 * Callbacks: there is a direct correlation between the number of areas and callbaks, so the first area will try to execute the first callback and so on. The callback may receives an identifier value, setted in the area as the fourth value.
 * Conditions: functions that return boolean values. They determin if a point is in any area and the conditional function returns true, then a callback is triggered. The callback may receives an identifier value, setted in the area as the fourth value.
-* Not in any area callback: it's optional callback that's triggered when the pointer lands in any area.
+* Not in any area callback: it's optional callback that's triggered when the pointer lands in no area.
 
 ```javascript
 var height = 50;
@@ -31,13 +31,12 @@ var id_2 = 2;
 var areas = [[heigth, width, [x,y], id_1], [heigth, width, [500,50], id_2]];
 var callbacks = [function(id){alert("Hey you are in a zone. ID: "+id);}, function(){alert("Hey you are in another zone");}];
 
-// The second parameter is not beings use right now but i'm planning on adding conditions for the callbacks
 activeArea.initialize(areas, [function(){return true;}, function(id){return id != 0;}], callbacks);
 ```
 
 == Second: run
 
-Once you have set this up, you are ready to go. The run method  takes position information from a position source (in most cases the mouse but could be a multitouch screen or something else) and determins witch areas activated.
+Once you have set this up, you are ready to go. The run method takes position information from a position source (in most cases the mouse but could be a multitouch screen or something else) and determins witch areas activated.
 
 ```javascript
 // It expects a list of array like this [x,y,z] where x,y are position and z might be magnitude, speed, time, etc.
