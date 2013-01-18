@@ -26,27 +26,6 @@
 	
 	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
 	<link rel="stylesheet" href="themes/transition/horizontal-slide.css">
-	
-	<script src="javascript/modernizr.custom.js"></script>
-  <script type="text/javascript" src="javascript/active_areas.js"></script>
-  <script type="text/javascript" src="javascript/track_mouse.js"></script>
-  <script type="text/javascript">
-    window.active_area = undefined;
-    left_area =  [120, 1900, [0,0], 0];
-    right_area = [120, 1900, [document.documentElement.clientWidth - 120, 0], 1];
-    areas = [left_area, right_area];
-    
-    check_if_active = function(id){ return window.active_area != id; };
-    conditions = [check_if_active, check_if_active];
-    
-    prev_slide = function(id){ $.deck('prev'); window.active_area = id; };
-    next_slide = function(id){ $.deck('next'); window.active_area = id; };
-    callbacks = [function(id){ if (window.active_area != id){ setTimeout(function(){prev_slide(id);}, 10); }}, function(id){ if (window.active_area != id){ setTimeout(function(){next_slide(id);}, 10); }}];
-    
-    clear_active_area = function(){ window.active_area = undefined; };
-    
-    window.onload = init(areas, conditions, callbacks, clear_active_area);
-  </script>
 
 </head>
 
@@ -202,8 +181,14 @@
 
 
 <!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="javascript/jquery-1.7.2.min.js"><\/script>')</script>
+
+<script src="javascript/modernizr.custom.js"></script>
+<script type="text/javascript" src="javascript/active_areas.js"></script>
+<script type="text/javascript" src="javascript/track_mouse.js"></script>
+<script type="text/javascript" src="javascript/deck_with_active_areas.js"></script>
+<script type="text/javascript" src="javascript/init.js"></script>
 
 <!-- Deck Core and extensions -->
 <script src="core/deck.core.js"></script>

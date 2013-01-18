@@ -1,0 +1,1 @@
+window.onload = function(){ DeckWithActiveAreas.init(); MouseTracker.init(); };
