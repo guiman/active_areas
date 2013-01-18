@@ -6,7 +6,7 @@ This library allows you to define areas on the viewport
 and respond to mouse movement over them. 
 
 */
-var activeArea = function(){
+var ActiveAreas = {
   /*
   
   References:
@@ -26,46 +26,51 @@ var activeArea = function(){
 
   */
   
+  _areas: [],
+  
+  _conditions: [],
+  
+  _callbacks: [],
+  
+  active_area: undefined,
 
-  var _areas = new Array();
-  var _conditions = new Array();
-  var _callbacks = new Array();
-
-  function initialize(areas, conditions, callbacks, not_in_any_area)
+  initialize: function (areas, conditions, callbacks, not_in_any_area)
   {
-    _areas = areas;
-    _conditions = conditions; // To be used in the near future
-    _callbacks = callbacks;
-    _not_in_any_area_callback = (not_in_any_area == undefined)? function(){} : not_in_any_area;
-  }
+    this._areas = areas;
+    this._conditions = conditions;
+    this._callbacks = callbacks;
+    this._not_in_any_area_callback = (not_in_any_area == undefined)? function(){} : not_in_any_area;
+  },
 
-  function run(stream_data)
+  run: function (stream_data)
   {
-    ret = activate_areas(stream_data, _areas);
+    var ret = this.activate_areas(stream_data, this._areas);
     
     if (ret.length == 0)
     {
-      _not_in_any_area_callback();
+      this._not_in_any_area_callback();
     }
     
     return ret;
-  }
+  },
 
-  function destroy()
+  destroy: function ()
   {
-    _areas = new Array();
-    _conditions = new Array();
-    _callbacks = new Array();
-  }
+    this._areas = [];
+    this._conditions = [];
+    this._callbacks = [];
+  },
 
-  function activate_areas(stream_data, areas)
+  activate_areas: function (stream_data, areas)
   {
-    active_areas = new Array();
+    var active_areas = new Array();
     
     for (i = 0; i < areas.length ; i++)
     { 
       for (j = 0; j < stream_data.length; j++)
       {
+        var x, y, x_1, y_1;
+        
         x = stream_data[j][0];
         y = stream_data[j][1];
       
@@ -75,15 +80,15 @@ var activeArea = function(){
         y_1 = areas[i][2][1];
         y_2 = y_1 + areas[i][1];
     
-        in_area = (y >= y_1) && (y <= y_2) && (x >= x_1) && (x <= x_2)
+        var in_area = (y >= y_1) && (y <= y_2) && (x >= x_1) && (x <= x_2)
     
         if (in_area)
         {
           active_areas.push(areas[i]);
           
-          if ((conditions[i] != undefined) && (conditions[i](areas[i][3]) == true))
+          if ((this._conditions[i] != undefined) && (this._conditions[i](areas[i][3]) == true))
           {
-            _callbacks[i](areas[i][3]);
+            this._callbacks[i](areas[i][3]);
           }
         }
       }
@@ -91,11 +96,4 @@ var activeArea = function(){
   
     return active_areas;
   }
-  
-	return {
-		initialize: initialize,
-		run: run,
-    destroy: destroy
-	} 
-  
-}();
+};
