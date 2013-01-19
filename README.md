@@ -56,7 +56,7 @@ ActiveAreas.destroy() cleans state information so activeArea could be reused.
 Why would you do something like this?
 -------------------------------------
 
-Last couple months I've been getting intereseted in HCI, looking for new ways of making applications on the web (focusing on the users satisfaction while using them). On the same road while working on [Baku](https://github.com/guiman/baku) with my friend and co-creator of the project [dpaez](https://github.com/dpaez), we sumbled uppon the concept of NUIs which are awesome (you should read [Brave NUI world](http://www.amazon.com/Brave-NUI-World-Designing-Interfaces/dp/0123822319)).
+Last couple months I've been getting intereseted in HCI, looking for new ways of making applications on the web (focusing on the users satisfaction while using them). On the same road while working on [Baku](https://github.com/guiman/baku) with my friend and co-creator of the project [dpaez](https://github.com/dpaez), we stumbled upon the concept of NUIs which are awesome (you should read [Brave NUI world](http://www.amazon.com/Brave-NUI-World-Designing-Interfaces/dp/0123822319)).
 
 This library it's an attemp to build a movement aware surface on the browser screen, that could help develop this new kinds of interfaces.
 
